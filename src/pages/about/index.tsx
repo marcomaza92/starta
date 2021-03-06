@@ -1,13 +1,13 @@
-import styles from './index.module.scss';
+import styles from './about.module.scss';
 
-const Home = () => {
+const About = () => {
   return (
     <main className={styles.main}>
       <h1 className={styles.title} data-testid="title">
-        Starta
+        About
       </h1>
     </main>
   );
 }
 
-export default Home;
+export default About;
