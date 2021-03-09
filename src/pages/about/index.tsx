@@ -8,6 +8,6 @@ const About = () => {
       </h1>
     </main>
   );
-}
+};
 
 export default About;
