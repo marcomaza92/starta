@@ -1,3 +1,20 @@
-.main {
-  text-align: center;
+.list {
+  width: 100%;
+}
+
+.listInfo {
+  max-width: 100%;
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  min-height: 100px;
+  outline: 2px solid blue;
 }
