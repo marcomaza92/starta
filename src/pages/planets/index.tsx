@@ -4,7 +4,6 @@ import styles from './planets.module.scss';
 
 const Planets = () => {
   const { planets } = useContext(PlanetsContext);
-  console.log('planets page', planets);
   return (
     <section className={styles.main}>
       <h2>All Planets</h2>

@@ -1,6 +1,8 @@
 import { useContext } from 'react';
-import PlanetsProvider, { PlanetsContext } from '../context/Planets';
+import PeopleProvider from '../context/People';
+import PlanetsProvider from '../context/Planets';
 import QueryProvider from '../context/Query';
+import SpeciesProvider from '../context/Species';
 import ThemeProvider, { ThemeContext } from '../context/Theme';
 import '../styles/globals.scss';
 
@@ -10,9 +12,13 @@ const MyApp = ({ Component, pageProps }) => {
     <QueryProvider>
       <ThemeProvider>
         <PlanetsProvider>
-          <div className={`${options.mode}`}>
-            <Component {...pageProps} />
-          </div>
+          <PeopleProvider>
+            <SpeciesProvider>
+              <div className={`${options.mode}`}>
+                <Component {...pageProps} />
+              </div>
+            </SpeciesProvider>
+          </PeopleProvider>
         </PlanetsProvider>
       </ThemeProvider>
     </QueryProvider>
