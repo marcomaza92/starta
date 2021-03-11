@@ -89,10 +89,9 @@ const Planets = ({ initialPlanets, pageId }) => {
                     href={{
                       pathname: '/planet/[id]',
                       query: {
-                        id:
-                          (Number(router.query.id) - 1) *
-                            planets?.results.length +
-                          (index + 1),
+                        id: item.url
+                          .slice(0, -1)
+                          .slice(item.url.slice(0, -1).lastIndexOf('/') + 1),
                       },
                     }}
                   >
