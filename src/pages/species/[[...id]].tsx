@@ -89,10 +89,9 @@ const Species = ({ initialSpecies, pageId }) => {
                     href={{
                       pathname: '/specie/[id]',
                       query: {
-                        id:
-                          (Number(router.query.id) - 1) *
-                            species?.results.length +
-                          (index + 1),
+                        id: item.url
+                          .slice(0, -1)
+                          .slice(item.url.slice(0, -1).lastIndexOf('/') + 1),
                       },
                     }}
                   >
