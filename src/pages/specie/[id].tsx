@@ -1,13 +1,13 @@
 import { getItem, getItems } from '../../api/endpoints';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useContext, useEffect } from 'react';
-import { PlanetsContext } from '../../context/Planets';
-import styles from './planet.module.scss';
+import { SpeciesContext } from '../../context/Species';
+import styles from './specie.module.scss';
 import { useRouter } from 'next/router';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const initialPlanets = await getItems('planets');
-  const paths = initialPlanets.results.map((index) => ({
+  const initialSpecies = await getItems('species');
+  const paths = initialSpecies.results.map((index) => ({
     params: { id: (index + 1).toString() },
   }));
   return {
@@ -17,27 +17,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const initialPlanet = await getItem('planets', context.params.id);
+  const initialSpecie = await getItem('species', context.params.id);
   return {
     props: {
-      initialPlanet,
+      initialSpecie,
     },
     revalidate: 1,
   };
 };
 
-const Planets = ({ initialPlanet }) => {
-  const { planet, setPlanet } = useContext(PlanetsContext);
+const Planets = ({ initialSpecie }) => {
+  const { specie, setSpecie } = useContext(SpeciesContext);
   const router = useRouter();
   useEffect(() => {
-    setPlanet(initialPlanet);
+    setSpecie(initialSpecie);
   }, [router]);
   return (
     <section className={styles.main}>
       <div className={styles.list}>
-        <h3 className={styles.listTitle}>Planet Detail</h3>
+        <h3 className={styles.listTitle}>Specie Detail</h3>
         <div className={styles.listInfo}>
-          {planet ? <p>{planet?.name}</p> : <h3>Loading...</h3>}
+          {specie ? <p>{specie?.name}</p> : <h3>Loading...</h3>}
         </div>
       </div>
     </section>

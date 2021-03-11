@@ -24,10 +24,10 @@ export const getItem = async (type, id) => {
   }
 };
 
-export const paginateItems = async (type, value) => {
+export const paginateItems = async (type, page) => {
   try {
     const response = await fetch(
-      `http://swapi.dev/api/${type}/?search=${value}`,
+      `http://swapi.dev/api/${type}/?page=${page}`,
       getOptions
     );
     const data = await response.json();
@@ -37,10 +37,10 @@ export const paginateItems = async (type, value) => {
   }
 };
 
-export const searchItems = async (type, page) => {
+export const searchItems = async (type, value) => {
   try {
     const response = await fetch(
-      `http://swapi.dev/api/${type}/?page=${page}`,
+      `http://swapi.dev/api/${type}/?search=${value}`,
       getOptions
     );
     const data = await response.json();

@@ -27,15 +27,18 @@ const Home = ({ initialPlanets, initialPeople, initialSpecies }) => {
   const { species, setSpecies } = useContext(SpeciesContext);
   const types = [
     {
-      name: 'planets',
+      all: 'planets',
+      single: 'planet',
       data: planets,
     },
     {
-      name: 'people',
+      all: 'people',
+      single: 'person',
       data: people,
     },
     {
-      name: 'species',
+      all: 'species',
+      single: 'specie',
       data: species,
     },
   ];
@@ -50,25 +53,34 @@ const Home = ({ initialPlanets, initialPeople, initialSpecies }) => {
         Starta
       </h2>
       {types.map((type, index) => (
-        <>
+        <div key={index}>
           <div>
-            <Link href={`/${type.name}`}>
-              <a>{type.name}</a>
+            <Link key={index} href={`/${type.all}/`}>
+              <a>{type.all}</a>
             </Link>
           </div>
           <div className={styles.list}>
-            <h3 className={styles.listTitle}>{type.name}</h3>
+            <h3 className={styles.listTitle}>{type.all}</h3>
             <div className={styles.listInfo}>
               {type.data !== null ? (
                 <>
                   {type.data?.results.map((item, index) => (
                     <div className={styles.item} key={index}>
-                      <p>{item.name}</p>
+                      <Link
+                        href={{
+                          pathname: `/${type.single}/[id]`,
+                          query: {
+                            id: index + 1,
+                          },
+                        }}
+                      >
+                        <a>{item.name}</a>
+                      </Link>
                     </div>
                   ))}
                   <div className={styles.item}>
-                    <Link href={`/${type.name}`}>
-                      <a>See More {type.name}</a>
+                    <Link href={`/${type.all}/`}>
+                      <a>See more {type.all}</a>
                     </Link>
                   </div>
                 </>
@@ -77,7 +89,7 @@ const Home = ({ initialPlanets, initialPeople, initialSpecies }) => {
               )}
             </div>
           </div>
-        </>
+        </div>
       ))}
     </section>
   );
