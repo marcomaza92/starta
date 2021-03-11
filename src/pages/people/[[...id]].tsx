@@ -66,6 +66,7 @@ const People = ({ initialPeople, pageId }) => {
   };
   useEffect(() => {
     setPeople(initialPeople);
+    router.query.id === undefined ? (router.query.id = ['1']) : null;
   }, [router.query]);
   return (
     <section className={styles.main}>

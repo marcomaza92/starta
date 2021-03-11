@@ -66,6 +66,7 @@ const Planets = ({ initialPlanets, pageId }) => {
   };
   useEffect(() => {
     setPlanets(initialPlanets);
+    router.query.id === undefined ? (router.query.id = ['1']) : null;
   }, [router.query]);
   return (
     <section className={styles.main}>

@@ -66,6 +66,7 @@ const Species = ({ initialSpecies, pageId }) => {
   };
   useEffect(() => {
     setSpecies(initialSpecies);
+    router.query.id === undefined ? (router.query.id = ['1']) : null;
   }, [router.query]);
   return (
     <section className={styles.main}>
