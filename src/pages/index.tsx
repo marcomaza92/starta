@@ -6,6 +6,7 @@ import { useContext, useEffect } from 'react';
 import { PlanetsContext } from '../context/Planets';
 import { PeopleContext } from '../context/People';
 import { SpeciesContext } from '../context/Species';
+import CustomCarousel from '../components/molecules/Carousel';
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const initialPlanets = await getItems('planets');
@@ -53,41 +54,40 @@ const Home = ({ initialPlanets, initialPeople, initialSpecies }) => {
         Starta
       </h2>
       {types.map((type, index) => (
-        <div key={index}>
-          <div>
-            <Link key={index} href={`/${type.all}/`}>
-              <a>{type.all}</a>
-            </Link>
-          </div>
-          <div className={styles.list}>
-            <h3 className={styles.listTitle}>{type.all}</h3>
-            <div className={styles.listInfo}>
-              {type.data !== null ? (
-                <>
-                  {type.data?.results.map((item, index) => (
-                    <div className={styles.item} key={index}>
-                      <Link
-                        href={{
-                          pathname: `/${type.single}/[id]`,
-                          query: {
-                            id: index + 1,
-                          },
-                        }}
-                      >
-                        <a>{item.name}</a>
-                      </Link>
-                    </div>
-                  ))}
-                  <div className={styles.item}>
-                    <Link href={`/${type.all}/`}>
-                      <a>See more {type.all}</a>
+        <div key={index} className={styles.list}>
+          <h3 className={styles.listTitle}>{type.all}</h3>
+          <div className={styles.listInfo}>
+            {type.data !== null ? (
+              <CustomCarousel
+                centerMode={true}
+                centerSlidePercentage={30}
+                showIndicators={false}
+                showStatus={false}
+                showThumbs={false}
+              >
+                {type.data?.results.map((item, index) => (
+                  <div className={styles.item} key={index}>
+                    <Link
+                      href={{
+                        pathname: `/${type.single}/[id]`,
+                        query: {
+                          id: index + 1,
+                        },
+                      }}
+                    >
+                      <a>{item.name}</a>
                     </Link>
                   </div>
-                </>
-              ) : (
-                <div>Loading...</div>
-              )}
-            </div>
+                ))}
+                <div className={styles.item}>
+                  <Link href={`/${type.all}/`}>
+                    <a>See more {type.all}</a>
+                  </Link>
+                </div>
+              </CustomCarousel>
+            ) : (
+              <div>Loading...</div>
+            )}
           </div>
         </div>
       ))}
