@@ -7,6 +7,7 @@ import { PlanetsContext } from '../context/Planets';
 import { PeopleContext } from '../context/People';
 import { SpeciesContext } from '../context/Species';
 import CustomCarousel from '../components/molecules/Carousel';
+import { types } from '../api/static';
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const initialPlanets = await getItems('planets');
@@ -26,23 +27,10 @@ const Home = ({ initialPlanets, initialPeople, initialSpecies }) => {
   const { planets, setPlanets } = useContext(PlanetsContext);
   const { people, setPeople } = useContext(PeopleContext);
   const { species, setSpecies } = useContext(SpeciesContext);
-  const types = [
-    {
-      all: 'planets',
-      single: 'planet',
-      data: planets,
-    },
-    {
-      all: 'people',
-      single: 'person',
-      data: people,
-    },
-    {
-      all: 'species',
-      single: 'specie',
-      data: species,
-    },
-  ];
+  const dataItems = [planets, people, species];
+  types.map((type, index) => {
+    type.data = dataItems[index];
+  });
   useEffect(() => {
     setPlanets(initialPlanets);
     setPeople(initialPeople);
