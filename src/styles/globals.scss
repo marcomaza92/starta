@@ -25,3 +25,14 @@ a {
 .carousel-root {
   width: 100%;
 }
+
+.carousel .slide {
+  background: transparent;
+}
+
+.main-layout {
+  display: grid;
+  grid-auto-columns: 100%;
+  grid-template-rows: 0.5fr minmax(60vh, auto) 0.25fr;
+  height: 100vh;
+}

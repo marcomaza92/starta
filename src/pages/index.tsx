@@ -38,14 +38,11 @@ const Home = ({ initialPlanets, initialPeople, initialSpecies }) => {
   }, []);
   return (
     <section className={`${styles.main}`}>
-      <h2 className={styles.title} data-testid="title">
-        Starta
-      </h2>
       {types.map((type, index) => (
         <div key={index} className={styles.list}>
-          <h3 className={styles.listTitle}>{type.all}</h3>
-          <div className={styles.listInfo}>
-            {type.data !== null ? (
+          <h3 className={styles.listTitle}>{type.title}</h3>
+          {type.data !== null ? (
+            <div className={styles.listInfo}>
               <CustomCarousel
                 centerMode={true}
                 centerSlidePercentage={30}
@@ -54,7 +51,12 @@ const Home = ({ initialPlanets, initialPeople, initialSpecies }) => {
                 showThumbs={false}
               >
                 {type.data?.results.map((item, index) => (
-                  <div className={styles.item} key={index}>
+                  <div
+                    className={`${styles.item} ${
+                      styles[`item-${Math.floor(Math.random() * 30) + 1}`]
+                    }`}
+                    key={index}
+                  >
                     <Link
                       href={{
                         pathname: `/${type.single}/[id]`,
@@ -73,10 +75,15 @@ const Home = ({ initialPlanets, initialPeople, initialSpecies }) => {
                   </Link>
                 </div>
               </CustomCarousel>
-            ) : (
-              <div>Loading...</div>
-            )}
-          </div>
+              <p className={styles.listSeeMore}>
+                <Link href={`/${type.all}/`}>
+                  <a>See more {type.all}</a>
+                </Link>
+              </p>
+            </div>
+          ) : (
+            <div>Loading...</div>
+          )}
         </div>
       ))}
     </section>

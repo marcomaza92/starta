@@ -1,11 +1,30 @@
+@use 'sass:color';
+@use 'sass:math';
+
+.main {
+  padding: 0 2rem;
+  overflow: auto;
+}
+
 .list {
   width: 100%;
 }
 
 .listInfo {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 1rem;
+}
+
+.listSeeMore {
+  width: 100%;
+  text-align: right;
+  transition: 250ms ease-in-out;
+  transition-property: color;
+
+  &:hover {
+    color: #47c5ff;
+  }
 }
 
 .item {
@@ -14,5 +33,15 @@
   justify-content: center;
   min-width: 250px;
   min-height: 200px;
-  outline: 2px solid blue;
+  font-size: 1.25rem;
+  background: #47c5ff;
+}
+
+@for $var from 1 through 30 {
+  .item-#{$var} {
+    background: color.adjust(
+      #47c5ff,
+      $hue: (math.ceil(math.random() * 127) + 1)
+    );
+  }
 }

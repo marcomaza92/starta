@@ -16,7 +16,7 @@ const MyApp = ({ Component, pageProps }) => {
         <PlanetsProvider>
           <PeopleProvider>
             <SpeciesProvider>
-              <div className={`${options.mode}`}>
+              <div className={`${options.mode} main-layout`}>
                 <Header />
                 <Component {...pageProps} />
                 <Footer />
