@@ -1,17 +1,30 @@
-.list {
+.main {
+  padding: 0 2rem;
+}
+
+.detail {
   width: 100%;
 }
 
-.listInfo {
+.detailInfo {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
-.item {
+.detailImage {
+  width: 30%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: calc(25% - 0.5rem);
-  outline: 2px solid blue;
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+}
+
+.detailTextContainer {
+  width: 70%;
+}
+
+.detailText {
+  font-size: 1.25rem;
 }

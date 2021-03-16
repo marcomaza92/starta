@@ -64,6 +64,19 @@ const Planets = ({ initialPlanets, pageId }) => {
       setIsSearching(false);
     }
   };
+  const climateImage = (planet) => {
+    switch (planet.climate.split(',')[0]) {
+      case 'arid':
+        return 'arid';
+        break;
+      case 'frozen':
+        return 'frozen';
+        break;
+      default:
+        return 'temperate';
+        break;
+    }
+  };
   useEffect(() => {
     setPlanets(initialPlanets);
     router.query.id === undefined ? (router.query.id = ['1']) : null;
@@ -75,16 +88,17 @@ const Planets = ({ initialPlanets, pageId }) => {
       <div className={styles.list}>
         {planets ? (
           <>
-            <label htmlFor="">
+            <label className={styles.search} htmlFor="">
               <input
                 onKeyDown={handleKeyEnter}
                 type="text"
-                placeholder="search planets"
+                placeholder="Search Planets"
               />
             </label>
             <div className={styles.listInfo}>
               {planets?.results.map((item, index) => (
                 <div className={styles.item} key={index}>
+                  <img src={`/${climateImage(item)}.png`} alt="" />
                   <Link
                     href={{
                       pathname: '/planet/[id]',
@@ -102,41 +116,53 @@ const Planets = ({ initialPlanets, pageId }) => {
             </div>
             <div className={styles.pagination}>
               {planets?.previous !== null && (
-                <Link
-                  href={{
-                    pathname: '/planets/[[...id]]',
-                    query: {
-                      id: Number(router.query.id) - 1,
-                    },
-                  }}
-                >
-                  <a className={styles.page}>Previous Page</a>
-                </Link>
+                <p className={styles.page}>
+                  <Link
+                    href={{
+                      pathname: '/planets/[[...id]]',
+                      query: {
+                        id: Number(router.query.id) - 1,
+                      },
+                    }}
+                  >
+                    <a>Previous Page</a>
+                  </Link>
+                </p>
               )}
               {planetsPagesArray.map((page, index) => (
-                <Link
-                  key={index}
-                  href={{
-                    pathname: '/planets/[[...id]]',
-                    query: {
-                      id: page + 1,
-                    },
-                  }}
+                <p
+                  className={`${styles.page} ${
+                    index + 1 === Number(router.query.id)
+                      ? styles.currentPage
+                      : null
+                  }`}
                 >
-                  <a className={styles.page}>{page + 1}</a>
-                </Link>
+                  <Link
+                    key={index}
+                    href={{
+                      pathname: '/planets/[[...id]]',
+                      query: {
+                        id: page + 1,
+                      },
+                    }}
+                  >
+                    <a>{page + 1}</a>
+                  </Link>
+                </p>
               ))}
               {planets?.next !== null && (
-                <Link
-                  href={{
-                    pathname: '/planets/[[...id]]',
-                    query: {
-                      id: Number(router.query.id) + 1,
-                    },
-                  }}
-                >
-                  <a className={styles.page}>Next Page</a>
-                </Link>
+                <p className={styles.page}>
+                  <Link
+                    href={{
+                      pathname: '/planets/[[...id]]',
+                      query: {
+                        id: Number(router.query.id) + 1,
+                      },
+                    }}
+                  >
+                    <a>Next Page</a>
+                  </Link>
+                </p>
               )}
             </div>
           </>
