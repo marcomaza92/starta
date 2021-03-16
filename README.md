@@ -1,34 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Starta - Star Wars Encarta Encyclopedia
 
-## Getting Started
+## Summary
 
-First, run the development server:
+Starta is a web app that uses SWAPI as its API and NextJS as the front-end framework.
 
-```bash
-npm run dev
-# or
-yarn dev
+## Install
+
+Clone this repository and install the dependencies:
+
+```
+npm i
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Start the dev server:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
+npm run dev
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Available commands
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- `npm run lint`: runs ESLint and Stylelint in the entire code base
+- `npm run format`: runs Prettier in the entire code base
 
-## Learn More
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- NextJS
+- React Query
+- React Context API
+- React Hooks
+- Typescript
+- Jest
+- SCSS Modules
+- ESLint
+- Stylelint
+- Husky
+- Prettier
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Functionalities
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Main
 
-## Deploy on Vercel
+- Use Planets, People and Species endpoints as the main data sources
+- Display all the main data sources
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Enhancements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Add pages for both data list and data detail of each type
+- Add `Typescript` for safe typing and data handling
+- Add `Atomic Design` convention to the code base
+- Implement `React Query` to fetch with Context API
+- Implement `React Hooks` for better adaptability with functional components
+- Implement `Sass` and `SCSS Modules` for better styling
+- Implement native `CSS Grid` and `CSS Flexbox`
+- Add `ESLint` and `Stylelint` for better and concise code styling
+- Add `Prettier` for faster DX
+- Implement `Husky` and Git Hooks for safer commits
+- Implement `Jest` for better coverage
+
+## To-Do
+
+- [ ] Add responsiveness
+- [ ] Add better test coverage
+- [ ] Update types 
+- [ ] Make data connections between planet, person and specie
+- [ ] Consolidate similar pages into one
