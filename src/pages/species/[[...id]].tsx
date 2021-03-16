@@ -64,6 +64,20 @@ const Species = ({ initialSpecies, pageId }) => {
       setIsSearching(false);
     }
   };
+  const specieColor = (specie) => {
+    const value = specie.skin_colors.split(',')[0];
+    switch (value) {
+      case 'caucasian':
+        return 'pink';
+        break;
+      case 'n/a':
+        return 'gray';
+        break;
+      default:
+        return value;
+        break;
+    }
+  };
   useEffect(() => {
     setSpecies(initialSpecies);
     router.query.id === undefined ? (router.query.id = ['1']) : null;
@@ -75,16 +89,22 @@ const Species = ({ initialSpecies, pageId }) => {
       <div className={styles.list}>
         {species ? (
           <>
-            <label htmlFor="">
+            <label className={styles.search} htmlFor="">
               <input
                 onKeyDown={handleKeyEnter}
                 type="text"
-                placeholder="search species"
+                placeholder="Search Species"
               />
             </label>
             <div className={styles.listInfo}>
               {species?.results.map((item, index) => (
-                <div className={styles.item} key={index}>
+                <div
+                  className={styles.item}
+                  key={index}
+                  style={{
+                    backgroundColor: specieColor(item),
+                  }}
+                >
                   <Link
                     href={{
                       pathname: '/specie/[id]',
@@ -102,41 +122,53 @@ const Species = ({ initialSpecies, pageId }) => {
             </div>
             <div className={styles.pagination}>
               {species?.previous !== null && (
-                <Link
-                  href={{
-                    pathname: '/species/[[...id]]',
-                    query: {
-                      id: Number(router.query.id) - 1,
-                    },
-                  }}
-                >
-                  <a className={styles.page}>Previous Page</a>
-                </Link>
+                <p className={styles.page}>
+                  <Link
+                    href={{
+                      pathname: '/species/[[...id]]',
+                      query: {
+                        id: Number(router.query.id) - 1,
+                      },
+                    }}
+                  >
+                    <a>Previous Page</a>
+                  </Link>
+                </p>
               )}
               {speciesPagesArray.map((page, index) => (
-                <Link
-                  key={index}
-                  href={{
-                    pathname: '/species/[[...id]]',
-                    query: {
-                      id: page + 1,
-                    },
-                  }}
+                <p
+                  className={`${styles.page} ${
+                    index + 1 === Number(router.query.id)
+                      ? styles.currentPage
+                      : null
+                  }`}
                 >
-                  <a className={styles.page}>{page + 1}</a>
-                </Link>
+                  <Link
+                    key={index}
+                    href={{
+                      pathname: '/species/[[...id]]',
+                      query: {
+                        id: page + 1,
+                      },
+                    }}
+                  >
+                    <a>{page + 1}</a>
+                  </Link>
+                </p>
               ))}
               {species?.next !== null && (
-                <Link
-                  href={{
-                    pathname: '/species/[[...id]]',
-                    query: {
-                      id: Number(router.query.id) + 1,
-                    },
-                  }}
-                >
-                  <a className={styles.page}>Next Page</a>
-                </Link>
+                <p className={styles.page}>
+                  <Link
+                    href={{
+                      pathname: '/species/[[...id]]',
+                      query: {
+                        id: Number(router.query.id) + 1,
+                      },
+                    }}
+                  >
+                    <a>Next Page</a>
+                  </Link>
+                </p>
               )}
             </div>
           </>

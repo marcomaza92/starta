@@ -29,16 +29,63 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const Planets = ({ initialSpecie }) => {
   const { specie, setSpecie } = useContext(SpeciesContext);
   const router = useRouter();
+  const specieColor = () => {
+    const value = specie.skin_colors.split(',')[0];
+    switch (value) {
+      case 'caucasian':
+        return 'pink';
+        break;
+      case 'n/a':
+        return 'gray';
+        break;
+      default:
+        return value;
+        break;
+    }
+  };
   useEffect(() => {
     setSpecie(initialSpecie);
   }, [router]);
   return (
     <section className={styles.main}>
       <div className={styles.list}>
-        <h3 className={styles.listTitle}>Specie Detail</h3>
-        <div className={styles.listInfo}>
-          {specie ? <p>{specie?.name}</p> : <h3>Loading...</h3>}
-        </div>
+        <h3 className={styles.detailTitle}>{specie?.name}</h3>
+        {specie ? (
+          <div className={styles.detailInfo}>
+            <div className={styles.detailListContainer}>
+              <ul className={styles.detailList}>
+                <li className={styles.detailListItem}>
+                  <img src="/height.png" alt="" />
+                  <span>{specie.average_height}</span>
+                </li>
+                <li className={styles.detailListItem}>
+                  <img src="/color.png" alt="" />
+                  <span>{specie.skin_colors}</span>
+                </li>
+                <li className={styles.detailListItem}>
+                  <img src="/hair-color.png" alt="" />
+                  <span>{specie.hair_colors}</span>
+                </li>
+                <li className={styles.detailListItem}>
+                  <img src="/eye-color.png" alt="" />
+                  <span>{specie.eye_colors}</span>
+                </li>
+                <li className={styles.detailListItem}>
+                  <img src="/life.png" alt="" />
+                  <span>{specie.average_lifespan}</span>
+                </li>
+                <li className={styles.detailListItem}>
+                  <img src="/language.png" alt="" />
+                  <span>{specie.language}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <div className={styles.detailLoader}>
+            <h3>Loading...</h3>
+          </div>
+        )}
       </div>
     </section>
   );
