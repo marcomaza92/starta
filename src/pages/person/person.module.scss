@@ -1,17 +1,46 @@
-.list {
+.main {
+  padding: 0 2rem;
+}
+
+.detail {
   width: 100%;
 }
 
-.listInfo {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+.detailTitle {
+  padding: 2rem 0;
+  font-size: 1.5rem;
 }
 
-.item {
+.detailInfo {
+  display: flex;
+}
+
+.detailImage {
+  width: 50%;
   display: flex;
   align-items: center;
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+}
+
+.detailListContainer {
+  display: flex;
   justify-content: center;
-  width: calc(25% - 0.5rem);
-  outline: 2px solid blue;
+  flex-direction: column;
+  width: 50%;
+}
+
+.detailList {
+  list-style-type: none;
+  font-size: 1.25rem;
+}
+
+.detailListItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
 }

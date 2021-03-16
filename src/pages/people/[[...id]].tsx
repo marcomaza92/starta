@@ -64,6 +64,22 @@ const People = ({ initialPeople, pageId }) => {
       setIsSearching(false);
     }
   };
+  const personImage = (person) => {
+    let value = '';
+    if (person.species.length === 0) {
+      value = person.gender;
+    } else {
+      value =
+        Number(
+          person.species[0]
+            .slice(0, -1)
+            .slice(person.species[0].slice(0, -1).lastIndexOf('/') + 1)
+        ) === 2
+          ? 'droid'
+          : 'other';
+    }
+    return value;
+  };
   useEffect(() => {
     setPeople(initialPeople);
     router.query.id === undefined ? (router.query.id = ['1']) : null;
@@ -75,16 +91,17 @@ const People = ({ initialPeople, pageId }) => {
       <div className={styles.list}>
         {people ? (
           <>
-            <label htmlFor="">
+            <label className={styles.search} htmlFor="">
               <input
                 onKeyDown={handleKeyEnter}
                 type="text"
-                placeholder="search people"
+                placeholder="Search People"
               />
             </label>
             <div className={styles.listInfo}>
               {people?.results.map((item, index) => (
                 <div className={styles.item} key={index}>
+                  <img src={`/${personImage(item)}.png`} alt="" />
                   <Link
                     href={{
                       pathname: '/person/[id]',
@@ -102,41 +119,53 @@ const People = ({ initialPeople, pageId }) => {
             </div>
             <div className={styles.pagination}>
               {people?.previous !== null && (
-                <Link
-                  href={{
-                    pathname: '/people/[[...id]]',
-                    query: {
-                      id: Number(router.query.id) - 1,
-                    },
-                  }}
-                >
-                  <a className={styles.page}>Previous Page</a>
-                </Link>
+                <p className={styles.page}>
+                  <Link
+                    href={{
+                      pathname: '/people/[[...id]]',
+                      query: {
+                        id: Number(router.query.id) - 1,
+                      },
+                    }}
+                  >
+                    <a className={styles.page}>Previous Page</a>
+                  </Link>
+                </p>
               )}
               {peoplePagesArray.map((page, index) => (
-                <Link
-                  key={index}
-                  href={{
-                    pathname: '/people/[[...id]]',
-                    query: {
-                      id: page + 1,
-                    },
-                  }}
+                <p
+                  className={`${styles.page} ${
+                    index + 1 === Number(router.query.id)
+                      ? styles.currentPage
+                      : null
+                  }`}
                 >
-                  <a className={styles.page}>{page + 1}</a>
-                </Link>
+                  <Link
+                    key={index}
+                    href={{
+                      pathname: '/people/[[...id]]',
+                      query: {
+                        id: page + 1,
+                      },
+                    }}
+                  >
+                    <a className={styles.page}>{page + 1}</a>
+                  </Link>
+                </p>
               ))}
               {people?.next !== null && (
-                <Link
-                  href={{
-                    pathname: '/people/[[...id]]',
-                    query: {
-                      id: Number(router.query.id) + 1,
-                    },
-                  }}
-                >
-                  <a className={styles.page}>Next Page</a>
-                </Link>
+                <p className={styles.page}>
+                  <Link
+                    href={{
+                      pathname: '/people/[[...id]]',
+                      query: {
+                        id: Number(router.query.id) + 1,
+                      },
+                    }}
+                  >
+                    <a className={styles.page}>Next Page</a>
+                  </Link>
+                </p>
               )}
             </div>
           </>

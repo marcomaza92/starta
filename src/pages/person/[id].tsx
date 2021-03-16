@@ -29,16 +29,62 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const Planets = ({ initialPerson }) => {
   const { person, setPerson } = useContext(PeopleContext);
   const router = useRouter();
+  const personImage = () => {
+    let value = '';
+    if (person.species.length === 0) {
+      value = person.gender;
+    } else {
+      value =
+        Number(
+          person.species[0]
+            .slice(0, -1)
+            .slice(person.species[0].slice(0, -1).lastIndexOf('/') + 1)
+        ) === 2
+          ? 'droid'
+          : 'other';
+    }
+    return value;
+  };
   useEffect(() => {
     setPerson(initialPerson);
   }, [router]);
   return (
     <section className={styles.main}>
-      <div className={styles.list}>
-        <h3 className={styles.listTitle}>Person Detail</h3>
-        <div className={styles.listInfo}>
-          {person ? <p>{person.name}</p> : <h3>Loading...</h3>}
-        </div>
+      <div className={styles.detail}>
+        <h3 className={styles.detailTitle}>{person?.name}</h3>
+        {person ? (
+          <div className={styles.detailInfo}>
+            {personImage && (
+              <div className={styles.detailImage}>
+                <img src={`/${personImage()}.png`} alt={personImage()} />
+              </div>
+            )}
+            <div className={styles.detailListContainer}>
+              <ul className={styles.detailList}>
+                <li className={styles.detailListItem}>
+                  <img src="/height.png" alt="" />
+                  <span>{person.height}</span>
+                </li>
+                <li className={styles.detailListItem}>
+                  <img src="/weight.png" alt="" />
+                  <span>{person.mass}</span>
+                </li>
+                <li className={styles.detailListItem}>
+                  <img src="/birth.png" alt="" />
+                  <span>{person.birth_year}</span>
+                </li>
+                <li className={styles.detailListItem}>
+                  <img src="/gender.png" alt="" />
+                  <span>{person.gender}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <div className={styles.detailLoader}>
+            <h3>Loading...</h3>
+          </div>
+        )}
       </div>
     </section>
   );
