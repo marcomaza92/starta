@@ -1,0 +1,28 @@
+.container {
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navigation {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navItem {
+  transition: 250ms ease-in-out;
+  transition-property: color;
+
+  &:hover {
+    color: #47c5ff;
+  }
+}
+
+.currentSection {
+  color: #47c5ff;
+}
