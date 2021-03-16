@@ -34,10 +34,8 @@
 
   img {
     position: absolute;
-    top: 0;
-    left: 0;
-    object-fit: cover;
-    object-position: center center;
+    top: -50%;
+    left: -50%;
     transition: 250ms ease-in-out;
     transition-property: filter, -webkit-filter;
     filter: grayscale(1) contrast(0.5);

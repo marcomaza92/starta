@@ -48,7 +48,7 @@ const Planets = ({ initialPlanet }) => {
   return (
     <section className={styles.main}>
       <div className={styles.detail}>
-        <h3 className={styles.detailTitle}>Planet Detail</h3>
+        <h3 className={styles.detailTitle}>{planet?.name}</h3>
         {planet ? (
           <div className={styles.detailInfo}>
             {climateImage && (
