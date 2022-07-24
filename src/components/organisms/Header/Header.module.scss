@@ -1,17 +1,17 @@
 .container {
-  padding: 0 2rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
 }
 
 .navigation {
-  width: 30%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 30%;
 }
 
 .navItem {
