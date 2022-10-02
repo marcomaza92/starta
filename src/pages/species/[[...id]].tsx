@@ -102,7 +102,7 @@ const Species = ({ initialSpecies, pageId }) => {
                   className={styles.item}
                   key={index}
                   style={{
-                    backgroundColor: speciecolor(item),
+                    backgroundColor: specieColor(item),
                   }}
                 >
                   <Link
