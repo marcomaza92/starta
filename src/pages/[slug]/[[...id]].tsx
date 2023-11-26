@@ -146,7 +146,7 @@ const Planets = ({ initialData, pageId, type }) => {
                 />
               </label>
               <div className={styles.listInfo}>
-                {data?.results.map((item, index) => (
+                {data?.contextValue.map((item, index) => (
                   <div className={styles.item} key={index}>
                     <Link
                       href={{
